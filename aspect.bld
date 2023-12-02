@@ -1,0 +1,23 @@
+g++ -Wall -W -c -O3 src/voigt/humlicek.cpp
+g++ -Wall -W -c -O3 src/voigt/cmplx.cpp
+g++ -Wall -W -c -O3 src/count_lines.cpp
+g++ -Wall -W -c -O3 src/hisotops.cpp
+g++ -Wall -W -c -O3 src/intparab.cpp
+g++ -Wall -W -c -O3 src/ix1ix2.cpp
+g++ -Wall -W -c -O3 src/kabs.cpp
+g++ -Wall -W -c -O3 src/simpson.cpp
+g++ -Wall -W -c -O3 src/tauabs25.cpp
+g++ -Wall -W -c -O3 src/read_hitran160.cpp
+g++ -Wall -W -O3 src/main_aspect.cpp \
+humlicek.o \
+cmplx.o \
+count_lines.o \
+hisotops.o \
+intparab.o \
+ix1ix2.o \
+kabs.o \
+simpson.o \
+tauabs25.o \
+read_hitran160.o \
+-o aspect
+mv *.o obj

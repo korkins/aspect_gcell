@@ -1,0 +1,15 @@
+g++ -Wall -W -c -O3 src/voigt/humlicek.cpp
+g++ -Wall -W -c -O3 src/voigt/cmplx.cpp
+g++ -Wall -W -c -O3 src/count_lines.cpp
+g++ -Wall -W -c -O3 src/isotops.cpp
+g++ -Wall -W -c -O3 src/ix1ix2.cpp
+g++ -Wall -W -c -O3 src/read_hitran160.cpp
+g++ -Wall -W -O3 src/main_gcell.cpp \
+humlicek.o \
+cmplx.o \
+count_lines.o \
+isotops.o \
+ix1ix2.o \
+read_hitran160.o \
+-o gcell
+mv *.o obj
