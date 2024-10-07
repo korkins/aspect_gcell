@@ -1,0 +1,100 @@
+# Compiler
+CXX = g++
+
+# Compilation flags
+CXXFLAGS = -Wall -W -c -O3
+
+# Source files
+SRCS = src/voigt/humlicek.cpp \
+       src/voigt/cmplx.cpp \
+       src/count_lines.cpp \
+       src/hisotops.cpp \
+       src/ix1ix2.cpp \
+       src/read_hitran160.cpp \
+       src/intparab.cpp \
+       src/kabs.cpp \
+       src/simpson.cpp \
+       src/tauabs25.cpp \
+       src/main_aspect.cpp
+
+# Object files
+OBJS = $(SRCS:.cpp=.o)
+
+# Executable name
+EXEC = aspect
+
+# Default target
+all: $(EXEC) chmod
+
+# Linking
+$(EXEC): $(OBJS)
+	$(CXX) $(OBJS) -o $(EXEC)
+
+# Compiling
+src/voigt/cmplx.o: \
+	src/voigt/cmplx.cpp
+
+src/count_lines.o: \
+	src/count_lines.cpp \
+	src/paths.h \
+	src/const_param.h
+
+src/voigt/humlicek.o: \
+	src/voigt/humlicek.cpp \
+	src/voigt/cmplx.cpp \
+	src/voigt/cmplx.h
+
+src/hisotops.o: \
+	src/hisotops.cpp \
+	src/paths.h \
+	src/const_param.h
+
+src/ix1ix2.o: \
+	src/ix1ix2.cpp
+
+src/read_hitran160.o: \
+	src/read_hitran160.cpp \
+	src/paths.h \
+	src/const_param.h
+
+src/intparab.o: \
+	src/intparab.cpp
+
+src/kabs.o: \
+	src/kabs.cpp \
+	src/const_param.h \
+	src/ix1ix2.cpp \
+	src/voigt/humlicek.cpp
+
+src/simpson.o: \
+	src/simpson.cpp
+
+src/tauabs25.o: \
+	src/tauabs25.cpp \
+	src/simpson.cpp \
+	src/intparab.cpp
+
+src/main_aspect.o: \
+	src/main_aspect.cpp \
+	src/const_param.h \
+	src/hprofiles.h \
+	src/simpson.cpp \
+	src/intparab.cpp \
+	src/count_lines.cpp \
+	src/read_hitran160.cpp \
+	src/kabs.cpp \
+	src/tauabs25.cpp
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) $< -o $@
+
+# Make the executable executable
+chmod:
+	chmod +x $(EXEC)
+
+# Clean up
+clean:
+	rm -f $(OBJS) $(EXEC)
+
+# Phony targets
+.PHONY: all clean chmod

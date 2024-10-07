@@ -1,0 +1,10 @@
+7 13006.0  13166.0  0.01  1633.6   296.0  0.7145  gcell-o2a.txt
+
+molec_id:    1-H2O, 2-CO2, 3-O3, 4-N2O, 5-CO, 6-CH4, 7-O2, 10-NO2
+vmin:        (cm-1)
+vmax:        (cm-1)
+dv:          (cm-1)
+cell length: (cm)
+temperature: (K)
+pressuure:   (atm)
+output:      (cm2/molec) for k(v) or tau_abs(v)
