@@ -1,0 +1,8 @@
+ spectral interval: left bound {nu0}, resolution {dnu}, nu[inu] = nu0 + inu*dnu
+ 13050.0000  0.0100
+ data shape: number of records {nnu}, number of heights {nzkm}:
+ 11001  3
+ py: data = np.fromfile('*.bin', dtype=np.float32)
+ py: tau[0:nnu, 0:nzkm] = np.reshape(data, (nnu, nzkm))
+ dtype(*_inu.bin) = int_32bit
+ dtype(*.bin) = float_32bit
