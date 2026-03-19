@@ -58,6 +58,16 @@ REFS:
 				strcpy(fname_iso[iso], fname_iso_h2o[iso]);
 			} // for iso
 			break;
+		case 2: // co2 -- added 2026-03-06: Alex Glocer's CO2 Venus project 
+			niso = niso_co2;
+			for (iso = 0; iso < niso; iso++)
+			{
+				Qref[iso] = Qref_co2[iso];
+				mmass_iso[iso] = molar_mass_co2[iso];
+				Ia_iso[iso] = Ia_iso_co2[iso];
+				strcpy(fname_iso[iso], fname_iso_co2[iso]);
+			} // for iso
+			break;
 		case 6: // CH4
 			niso = niso_ch4;
 			for (iso = 0; iso < niso; iso++)
