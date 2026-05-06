@@ -4,11 +4,13 @@ This repository contains sources for two codes explained in S. Korkin, A. M. Say
 The first code is 'gcell' simulating line-by-line (LBL, monochromatic) absorption in a gas cell. Another one is 'aspect' for atmopsheric absorption spectroscopy simualtion. The two share many files - it is threfore recoemmended to look into 'gcell' before styding 'aspect'. The line parameters for both codes come from HITRAN (v.2020), hard-coded profiles of atmopsheric temperture, pressure, and gas concentration are from AFGL/MODTRAN.
 
 # Quick installation
-1. Download, unzip *.par files in ./hitran/
-2. In ./src/paths.h, lines 6-7, check paths and update if necessary
-3. Run make, two executables should be compiled shortly: ./gcell and ./aspect - see below for further instructions.
+1. Download to ./ (local folder with sources - any name is fine, paths to HITRAN database are hardcoded but relative)
+2. Unzip *.par files in ./hitran/
+3. PDFs comming with the source - paper and corrigendum - can be deleted
+4. In ./src/paths.h, lines 6-7, check paths and update if necessary
+5. Run 'make'. Two executables should be compiled shortly: ./gcell and ./aspect - see below for further instructions.
 
-# Gas cell mode - code GCELL:
+# Gas cell mode - code GCELL
 ## Input file format
 Set of parametrs (space or tab dilimited)  
 ```
@@ -25,6 +27,16 @@ Example:
 ```
     6    4081.901    4505.699    0.002    8.0    296.0    1.0    gcell-ch4.txt
 ```
+## Output file format
+top line, left number: fill_value=-999; right number: column number density, n_column (molec/cm2)  
+next lines, left number: wavenumber v (cm-1); right numbers: optical thickness tau(v)  
+
+Example:  
+-999.000  3.621485e+14
+500.000  1.613564e-17
+500.010  1.301552e-17
+...
+If needed, calculate absorption cross-section per molecule k(v) = tau / n_column (cm2/molec)
 
 ## Code structure (Tree & LOC)
 The lines of code (LOC) count excludes headers
