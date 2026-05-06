@@ -4,10 +4,18 @@ This repository contains sources for two codes explained in S. Korkin, A. M. Say
 The first code is 'gcell' simulating line-by-line (LBL, monochromatic) absorption in a gas cell. Another one is 'aspect' for atmopsheric absorption spectroscopy simualtion. The two share many files - it is threfore recoemmended to look into 'gcell' before styding 'aspect'. The line parameters for both codes come from HITRAN (v.2020/24), hard-coded profiles of atmopsheric temperture, pressure, and gas concentration are from AFGL/MODTRAN.
 
 # Gas cell absorption - code GCELL:
+## Input file format
+Set of parametrs (space or tab dilimited)
+    molec_id  nu_usr_min  nu_usr_max  dnu  lcm  T_kelv  p_atm  fname
+where
+
+
+
+
 ## Code structure (Tree & LOC)
 The lines of code (LOC) count excludes headers
 ```
-main_gcell (102)
+main_gcell (102)                                 # reads input file, makes calculations, prints output
          |
          +-paths (header)                        # defines hardcoded paths to HITRAN and TIPS files
          |
