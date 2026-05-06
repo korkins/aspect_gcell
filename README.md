@@ -9,12 +9,12 @@ Set of parametrs (space or tab dilimited)
 ```
     molec_id    nu_usr_min    nu_usr_max    dnu    lcm    T_kelv    p_atm    fname  
 ```
-*molec_id (integer) 1(H2O) 2(CO2) 6(CH4) 7(O2) 10(NO2)  
-*nu_usr_min, nu_usr_max, dnu (floats) define grid of wavenumbers, ν (cm-1); the minimum (left) and maximum (right) points in the grid are 'nu_usr_min' and 'nu_usr_max', respectively; dnu is step (often 0.01 cm-1)  
-*lcm (float) gas cell length l (cm)  
-*T_kelv (float) temperature in degrees Kelvin (K)  
-*p_atm (float) pressure in atmospheres (atm)  
-*fname (string) defines output file name (optionally, with path - up to 256 symbols long)  
+- molec_id (integer) 1(H2O) 2(CO2) 6(CH4) 7(O2) 10(NO2)  
+- nu_usr_min, nu_usr_max, dnu (floats) define grid of wavenumbers, ν (cm-1); the minimum (left) and maximum (right) points in the grid are 'nu_usr_min' and 'nu_usr_max', respectively; dnu is step (often 0.01 cm-1)  
+- lcm (float) gas cell length l (cm)  
+- T_kelv (float) temperature in degrees Kelvin (K)  
+- p_atm (float) pressure in atmospheres (atm)  
+- fname (string) defines output file name (optionally, with path - up to 256 symbols long)  
 
 Example:  
 ```
