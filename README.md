@@ -11,8 +11,7 @@ The first code is 'gcell' simulating line-by-line (LBL, monochromatic) absorptio
 5. Run 'make'. Two executables should be compiled shortly: ./gcell and ./aspect - see below for further instructions.
 
 # Troubleshooting
-Both codes were developed on a Windows machine. The HITRAN *.par files have been first downloaded to the Windows machine and opened during debugging or just for investigation. Then, the codes were uploaded to GitHub. Although we have tested them on a Linux machine, the difference in line endings in HITRAN *.par files may remain causing strange errors, like zeros on output (while there must be some absorption) or segmentation fault. The arguably easiest way is to open ASCII file on Linux machine, add and immediately remove space enywhere, save, run again.  
-
+Both codes were developed on a Windows machine. The HITRAN *.par files have been first downloaded to the Windows machine and opened during debugging or just for investigation. Then, the codes were uploaded to GitHub. Although we have tested them on a Linux machine, the difference in line endings in HITRAN *.par files may remain causing strange errors, like zeros on output (while there must be some absorption) or segmentation fault. The arguably easiest way is to open ASCII file on Linux machine, add and immediately remove space enywhere, save, run again. Alternatively, download new *.par files directly from HITRAN (https://hitran.org/lbl/) but keep the version difference, 2024 or later vs. 2020 in the paper, in mind.  
 If unsuccessful, seek help from sergey.v.korkin@nasa.gov or korkins@gmail.com (sharing your input would help).
 
 # Gas cell mode - code GCELL
