@@ -5,8 +5,8 @@ The first code is 'gcell' simulating line-by-line (LBL, monochromatic) absorptio
 
 # Gas cell absorption - code GCELL:
 ## Input file format
-Set of parametrs (space or tab dilimited)..
-    molec_id  nu_usr_min  nu_usr_max  dnu  lcm  T_kelv  p_atm  fname..
+Set of parametrs (space or tab dilimited)  
+    molec_id  nu_usr_min  nu_usr_max  dnu  lcm  T_kelv  p_atm  fname  
 where
 
 
