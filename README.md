@@ -1,2 +1,2 @@
-# aspect_gcell
-Source code for S. Korkin, A.M. Sayer, A. Ibrahim, and A. Lyapustin: "A practical guide to coding line-by-line trace gas absorption in Earth’s atmosphere"
+# Summary
+This repository contains source codes explained in S. Korkin, A. M. Sayer, A. Ibrahim, and A. Lyapustin, "A practical guide to coding line-by-line trace gas absorption in Earth’s atmosphere", Journal of Quantitative Spectroscopy and Radiative Transfer, vol. 37: 109345, 2025. doi: https://doi.org/10.1016/j.jqsrt.2025.109345 (note the corrigendum: https://doi.org/10.1016/j.jqsrt.2025.109713)
