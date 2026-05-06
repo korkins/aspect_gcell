@@ -41,4 +41,4 @@ LOC (excluding humlicek) = 102 + 34 + 38 + 59 + 28 = 261
 ```
 
 # Typos
-1. Page 5, Fig.1(a): ix1ix2() function block, cmomment (in green): "... x0-dx <= x[ix1] < x[ix*2*] <= x0+dx ..."
+1. Page 5, Fig.1(a): ix1ix2() function block, comment (in green): "... x0-dx <= x[ix1] < x[ix**2**] <= x0+dx ..." (note the bold **2**)
