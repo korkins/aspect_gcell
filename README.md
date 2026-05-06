@@ -3,7 +3,7 @@ This repository contains source codes explained in S. Korkin, A. M. Sayer, A. Ib
 
 # Gas cell absorption - code GCELL:
 ## Code structure (Tree & LOC)
-The lines of code count excludes headers
+The lines of code (LOC) count excludes headers
 ```
 main_gcell (102)
          |
