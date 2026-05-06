@@ -28,8 +28,8 @@ Example:
     6    4081.901    4505.699    0.002    8.0    296.0    1.0    gcell-ch4.txt
 ```
 ## Output file format
-top line, left number: fill_value=-999; right number: column number density, n_column (molec/cm2)  
-next lines, left number: wavenumber v (cm-1); right numbers: optical thickness tau(v)  
+- top line, left number: fill_value=-999; right number: column number density, n_column (molec/cm2)  
+- next lines, left number: wavenumber v (cm-1); right numbers: optical thickness tau(v)  
 
 Example:
 ```
