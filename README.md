@@ -3,6 +3,8 @@ This repository contains sources for two codes explained in S. Korkin, A. M. Say
 
 The first code is 'gcell' simulating line-by-line (LBL, monochromatic) absorption in a gas cell. Another one is 'aspect' for atmopsheric absorption spectroscopy simualtion. The two share many files - it is threfore recoemmended to look into 'gcell' before styding 'aspect'. The line parameters for both codes come from HITRAN (v.2020), hard-coded profiles of atmopsheric temperture, pressure, and gas concentration are from AFGL/MODTRAN.
 
+For another type of absorption, see S. Korkin, A. M. Sayer, A. Ibrahim, and A. Lyapustin, "A practical guide to simulating continuum absorption in Earth’s atmosphere", *Journal of Quantitative Spectroscopy and Radiative Transfer*, vol. TBD: TBD, 202X (2nd revision is in process).
+
 # Quick installation
 1. Download to ./ (local folder with sources - any name is fine, paths to HITRAN database are hardcoded but relative)
 2. Unzip *.par files in ./hitran/
