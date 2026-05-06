@@ -31,10 +31,12 @@ Example:
 top line, left number: fill_value=-999; right number: column number density, n_column (molec/cm2)  
 next lines, left number: wavenumber v (cm-1); right numbers: optical thickness tau(v)  
 
-Example:  
+Example:
+'''
 -999.000  3.621485e+14
 500.000  1.613564e-17
 500.010  1.301552e-17
+'''
 ...
 If needed, calculate absorption cross-section per molecule k(v) = tau / n_column (cm2/molec)
 
