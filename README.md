@@ -32,6 +32,15 @@ Example:
 ```
     6    4081.901    4505.699    0.002    8.0    296.0    1.0    gcell-ch4.txt
 ```
+## How compile and run
+Assuming ./ is the source directory (with ./src, ./hitran, etc.) run the follwoing commands:
+```
+    To compile only 'gcell' code: $ make -f makefile_g
+    To run the code without input file (quick test - O2 A-band will run by default): $ ./gcell
+    To run the code with user-defined input file (see Example above): $ ./gcell gcell-ch4.inp 
+```
+The latter command should result in the creation of the 'gcell-ch4.txt' file. The file can be compared vs. our output ./check/gcell-ch4_check.txt (mind the possible HITRAN difference).
+
 ## Output file format
 - top line, left number: fill_value=-999; right number: column number density, n_column (molec/cm2)  
 - next lines, left number: wavenumber v (cm-1); right numbers: optical thickness tau(v)  
