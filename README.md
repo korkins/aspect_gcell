@@ -25,30 +25,44 @@ For another type of absorption, see S. Korkin, A. M. Sayer, A. Ibrahim, and A. L
 - If unsuccessful, seek help from `sergey.v.korkin@nasa.gov` or `korkins@gmail.com` (sharing the input files is helpful).
 
 # Gas cell mode - code GCELL
-## Input file format
-Set of parametrs (space or tab dilimited)  
-```
-    molec_id    nu_usr_min    nu_usr_max    dnu    lcm    T_kelv    p_atm    fname  
-```
-- molec_id (integer) 1(H2O) 2(CO2) 6(CH4) 7(O2) 10(NO2)  
-- nu_usr_min, nu_usr_max, dnu (floats) define grid of wavenumbers, ν (cm-1); the minimum (left) and maximum (right) points in the grid are 'nu_usr_min' and 'nu_usr_max', respectively; dnu is step (often 0.01 cm-1)  
-- lcm (float) gas cell length l (cm)  
-- T_kelv (float) temperature in degrees Kelvin (K)  
-- p_atm (float) pressure in atmospheres (atm)  
-- fname (string) defines output file name (optionally, with path - up to 256 symbols long)  
 
-Example:  
+## How to compile and run
+
+Assuming `./` is the source directory (with `./src`, `./hitran`, etc.), run the following commands:
+
 ```
-    6    4081.901    4505.699    0.002    8.0    296.0    1.0    gcell-ch4.txt
+# Compile only the 'gcell' code
+$ make -f makefile_g
+
+# Run the code without an input file (quick test: the O2 A-band runs by default)
+$ ./gcell
+
+# Run the code with a user-defined input file (see example below)
+$ ./gcell gcell-ch4.inp
 ```
-## How compile and run
-Assuming ./ is the source directory (with ./src, ./hitran, etc.) run the follwoing commands:
+
+The latter command should create the file `gcell-ch4.txt` (see next section). The file can be compared against our output file `./check/gcell-ch4_check.txt` (keeping possible HITRAN version differences in mind).
+
+## Input file format
+
+Set of parameters (space- or tab-delimited)
+
 ```
-    To compile only 'gcell' code: $ make -f makefile_g
-    To run the code without input file (quick test - O2 A-band will run by default): $ ./gcell
-    To run the code with user-defined input file (see Example above): $ ./gcell gcell-ch4.inp 
+molec_id    nu_usr_min    nu_usr_max    dnu    lcm    T_kelv    p_atm    fname
 ```
-The latter command should result in the creation of the 'gcell-ch4.txt' file. The file can be compared vs. our output ./check/gcell-ch4_check.txt (mind the possible HITRAN difference).
+
+- `molec_id` (integer): 1(H2O), 2(CO2), 6(CH4), 7(O2), 10(NO2)
+- `nu_usr_min`, `nu_usr_max`, `dnu` (floats): define the grid of wavenumbers, ν (cm-1); the minimum (left) and maximum (right) grid points are `nu_usr_min` and `nu_usr_max`, respectively; `dnu` is the grid step (often 0.01 cm-1)
+- `lcm` (float): gas cell length, `l` (cm)
+- `T_kelv` (float): temperature in Kelvin (K)
+- `p_atm` (float): pressure in atmospheres (atm)
+- `fname` (string): output file name (optionally with path; up to 256 characters long)
+
+Example:
+
+```
+6    4081.901    4505.699    0.002    8.0    296.0    1.0    gcell-ch4.txt
+```
 
 ## Output file format
 - top line, left number: fill_value=-999; right number: column number density, n_column (molec/cm2)  
