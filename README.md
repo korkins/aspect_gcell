@@ -24,7 +24,7 @@ For another type of absorption, see S. Korkin, A. M. Sayer, A. Ibrahim, and A. L
 
 - If unsuccessful, seek help from `sergey.v.korkin@nasa.gov` or `korkins@gmail.com` (sharing the input files is helpful).
 
-# Gas cell mode - code GCELL
+# Gas cell mode - code `gcell`
 
 ## How to compile and run
 
