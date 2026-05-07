@@ -51,7 +51,7 @@ Set of parameters (space- or tab-delimited)
 molec_id    nu_usr_min    nu_usr_max    dnu    lcm    T_kelv    p_atm    fname
 ```
 
-- `molec_id` (integer): 1(H2O), 2(CO2), 6(CH4), 7(O2), 10(NO2)
+- `molec_id` (integer): 1 (H2O), 2 (CO2), 6 (CH4), 7 (O2), 10 (NO2)
 - `nu_usr_min`, `nu_usr_max`, `dnu` (floats): define the grid of wavenumbers, ν (cm-1); the minimum (left) and maximum (right) grid points are `nu_usr_min` and `nu_usr_max`, respectively; `dnu` is the grid step (often 0.01 cm-1)
 - `lcm` (float): gas cell length, `l` (cm)
 - `T_kelv` (float): temperature in Kelvin (K)
