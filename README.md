@@ -159,7 +159,7 @@ molec_id  iatm  column_amount  nu_usr_min  nu_usr_max  dnu  nzkm  zkm[]  fname  
 - `fname` (string): output file name (optionally with path; up to 256 characters long)
 - `fmt` (string: `txt` or `bin`): output format — ASCII if `txt`, binary otherwise
 
-Example:
+Example (note `-1.0` yields the standard amount of O2: 209000 ppmv or 20.9%):
 
 ```
 7   6   -1.0   13050.0   13160.0   0.01   3   0.0 2.5 5.0   O2   txt
