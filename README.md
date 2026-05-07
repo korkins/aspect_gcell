@@ -1,21 +1,28 @@
 # Summary
-This repository contains sources for two codes explained in S. Korkin, A. M. Sayer, A. Ibrahim, and A. Lyapustin, "A practical guide to coding line-by-line trace gas absorption in Earth’s atmosphere", *Journal of Quantitative Spectroscopy and Radiative Transfer*, vol. 37: 109345, 2025. doi: https://doi.org/10.1016/j.jqsrt.2025.109345 (also note the corrigendum: https://doi.org/10.1016/j.jqsrt.2025.109713).
 
-The first code is 'gcell' simulating line-by-line (LBL, monochromatic) absorption in a gas cell. Another one is 'aspect' for atmopsheric absorption spectroscopy simualtion. The two share many files - it is threfore recoemmended to look into 'gcell' before styding 'aspect'. The line parameters for both codes come from HITRAN (v.2020), hard-coded profiles of atmopsheric temperture, pressure, and gas concentration are from AFGL/MODTRAN.
+This repository contains the source codes described in S. Korkin, A. M. Sayer, A. Ibrahim, and A. Lyapustin, "A practical guide to coding line-by-line trace gas absorption in Earth’s atmosphere", *Journal of Quantitative Spectroscopy and Radiative Transfer*, vol. 337: 109345, 2025. doi: https://doi.org/10.1016/j.jqsrt.2025.109345 (see also the corrigendum: https://doi.org/10.1016/j.jqsrt.2025.109713).
 
-For another type of absorption, see S. Korkin, A. M. Sayer, A. Ibrahim, and A. Lyapustin, "A practical guide to simulating continuum absorption in Earth’s atmosphere", *Journal of Quantitative Spectroscopy and Radiative Transfer*, vol. TBD: TBD, 202X (2nd revision is in process).
+The first code, 'gcell', simulates line-by-line (LBL, monochromatic) absorption in a gas cell. The second one, 'aspect', is intended for atmospheric absorption spectroscopy simulations. The two codes share many files; therefore, it is recommended to study 'gcell' before exploring 'aspect'.
+
+For both codes, spectral line parameters are taken from HITRAN (v.2020), while the hard-coded atmospheric profiles of temperature, pressure, and gas concentration are based on AFGL/MODTRAN models.
+
+For another type of absorption, see S. Korkin, A. M. Sayer, A. Ibrahim, and A. Lyapustin, "A practical guide to simulating continuum absorption in Earth’s atmosphere", *Journal of Quantitative Spectroscopy and Radiative Transfer*, vol. TBD: TBD, 202X (currently under second revision).
 
 # Quick installation
-1. Download to ./ (local folder with sources - any name is fine, paths to HITRAN database are hardcoded but relative)
-2. Unzip *.par files in ./hitran/
-3. PDFs comming with the source - paper and corrigendum - can be deleted
-4. In ./src/paths.h, lines 6-7, check paths and update if necessary
-5. Run 'make'. Two executables should be compiled shortly: ./gcell and ./aspect - see below for further instructions.
+
+1. Download into `./` (a local source folder; any name is fine, since paths to the HITRAN database are hard-coded as relative paths).
+2. Unzip the `*.par` files into `./hitran/`.
+3. The PDFs included with the source code — the paper and corrigendum — may be deleted.
+4. In `./src/paths.h` (lines 6-7), check the paths and update them if necessary.
+5. Run `make`. Two executables should be compiled shortly: `./gcell` and `./aspect` — see below for further instructions.
 
 # Troubleshooting
-- Both codes were developed on a Windows machine. The HITRAN *.par files have been first downloaded to the Windows machine and opened during debugging or just for investigation. Then, the codes were uploaded to GitHub. Although we have tested them on a Linux machine, the difference in line endings in HITRAN *.par files may remain causing strange errors, like zeros on output (while there must be some absorption) or segmentation fault. The arguably easiest way is to open ASCII file on Linux machine, add and immediately remove space enywhere, save, run again. Alternatively, download new *.par files directly from HITRAN (https://hitran.org/lbl/) but keep the version difference, 2024 or later vs. 2020 in the paper, in mind.
-- Depending on machine, the user may run on an endianness discrepancy (https://en.wikipedia.org/wiki/Endianness) while comparing their *.bin output (from 'aspect' only) vs. ours. So far, we have never faced this problem.
-- If unsuccessful, seek help from sergey.v.korkin@nasa.gov or korkins@gmail.com (sharing your input would help).
+
+- Both codes were originally developed on a Windows machine. The HITRAN `*.par` files were first downloaded to Windows and occasionally opened during debugging or inspection. The codes were then uploaded to GitHub. Although we tested the GitHub version on Linux, differences in line endings between Windows and Linux in the HITRAN `*.par` files may still remain. This discrepancy can cause strange errors, such as zeros in the output (when some absorption should be present) or segmentation faults. Arguably the easiest fix is to open the ASCII file on a Linux machine, add and immediately remove a space anywhere in the file, save it, and run the code again. Alternatively, download fresh `*.par` files directly from HITRAN (https://hitran.org/lbl/), while keeping in mind the version difference: the paper uses HITRAN 2020, whereas newly downloaded files may correspond to HITRAN 2024 or later.
+
+- Depending on the machine, the user may encounter an endianness discrepancy (https://en.wikipedia.org/wiki/Endianness) while comparing their `*.bin` output files (from `aspect` only) against ours. So far, we have never encountered this problem ourselves.
+
+- If unsuccessful, seek help from `sergey.v.korkin@nasa.gov` or `korkins@gmail.com` (sharing the input files is helpful).
 
 # Gas cell mode - code GCELL
 ## Input file format
@@ -61,27 +68,27 @@ The lines of code (LOC) count excludes headers
 ```
 main_gcell (102)                                 # reads input file, makes calculations, prints output
          |
-         +-paths (header)                        # defines hardcoded paths to HITRAN and TIPS files
+         +-paths.h (header)                      # defines hardcoded paths to HITRAN and TIPS files
          |
-         +-const_param (header)                  # defines physical constants, file names, accuracy parameters
+         +-const_param.h (header)                # defines physical constants, file names, accuracy parameters
          |
          +-count_lines (34)                      # counts HITRAN records within user-defined spectral band
          |           |
-         |           +-paths (header)
+         |           +-paths.h
          |           |
-         |           +-const_param (header)
+         |           +-const_param.h
          |
          +-read_hitran160 (38)                   # reads HITRAN data from a 160 symbols per record *.par ASCII file
          |              |
-         |              +-paths (header)
+         |              +-paths.h
          |              |
-         |              +-const_param (header)
+         |              +-const_param.h
          |
          +-isotops (59)                          # calculates TIPS ratio and returns parameters of isotopes
          |       |
-         |       +-paths (header)
+         |       +-paths.h
          |       |
-         |       +-const_param (header)
+         |       +-const_param.h
          |
          +-ix1ix2 (28)                           # for x0 and dx, finds indices in an array x[] so that x0-dx <= x[ix1] < x[ix2] <= x0+dx
          |
@@ -89,7 +96,7 @@ main_gcell (102)                                 # reads input file, makes calcu
                   |
                   +-cmplx.h (header)
                   |
-                  +-cmplx (61)
+                  +-cmplx (61)                   # set of complex arithmetics functions for humlicek(...)
 
 LOC (excluding humlicek) = 102 + 34 + 38 + 59 + 28 = 261
 ```
