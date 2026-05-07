@@ -37,11 +37,11 @@ $ make -f makefile_g
 # Run the code without an input file (quick test: the O2 A-band runs by default)
 $ ./gcell
 
-# Run the code with a user-defined input file (see example below)
-$ ./gcell gcell-ch4.inp
+# Run the code with a user-defined input file
+$ ./gcell filename
 ```
 
-The latter command should create the file `gcell-ch4.txt` (see next section). The file can be compared against our output file `./check/gcell-ch4_check.txt` (keeping possible HITRAN version differences in mind).
+The latter command should create the file, e.g., `gcell-ch4.txt` (see next section). The file can be compared against our output file `./check/gcell-ch4_check.txt` (keeping possible HITRAN version differences in mind).
 
 ## Input file format
 
@@ -122,6 +122,48 @@ main_gcell (102)                                 # reads input file, performs ca
 LOC (excluding `humlicek`) = 102 + 34 + 38 + 59 + 28 = 261  
 
 Code `aspect` does not use `main_gcell` and `isotops` functions
+
+# Atmospheric mode - code `aspect`
+
+## How to compile and run
+
+Assuming `./` is the source directory (with `./src`, `./hitran`, etc.), run the following commands:
+
+```
+# Compile only the 'aspect' code (note _a, contrary to _g for 'gcell')
+$ make -f makefile_a
+
+# Run the code without an input file (quick test: the O2 A-band runs by default)
+$ ./aspect
+
+# Run the code with a user-defined input file
+$ ./aspect filename
+```
+
+The latter command should create the file, e.g., `aspect-o2.txt` (see next section). The file can be compared against our output file `./check/gcell-ch4_check.txt` (keeping possible HITRAN version differences in mind).
+
+## Input file format
+
+Set of parameters (space- or tab-delimited)
+
+```
+molec_id  iatm  column_amount  nu_usr_min  nu_usr_max  dnu  nzkm  zkm[]  fname  fmt
+```
+
+- `molec_id` (integer): 1 (H2O), 2 (CO2), 3 (O3), 4 (N2O), 5 (CO), 6 (CH4), 7 (O2), 10 (NO2)
+- `iatm` (integer): 1 - Tropical, 2 & 3 - Midlatitude summer & winter, 4 & 5 - Subarctic summer & winter, 6 - Standard US 1976 (AFGL/MODTRAN atmospheric profiles)
+- `column_amount` (float): total atmospheric column amount of the selected gas. For `molec_id = 1`: cm of precipitable water; for all other gases: parts per million in volume (ppmv). A negative value (e.g. `-1.0`) instructs `aspect` to take the column amount from AFGL/MODTRAN
+- `nu_usr_min`, `nu_usr_max`, `dnu` (floats): define the grid of wavenumbers, ν (cm⁻¹); the minimum (left) and maximum (right) grid points are `nu_usr_min` and `nu_usr_max`, respectively; `dnu` is the grid step (often 0.01 cm⁻¹)
+- `nzkm` (integer): number of altitude levels at which spectral absorption optical depth τ(ν, z) will be calculated
+- `zkm[]` (array of `nzkm` floats): altitudes (km); τ(ν, z) corresponds to optical depth between TOA and level z
+- `fname` (string): output file name (optionally with path; up to 256 characters long)
+- `fmt` (string: `txt` or `bin`): output format — ASCII if `txt`, binary otherwise
+
+Example:
+
+```
+7   6   -1.0   13050.0   13160.0   0.01   3   0.0 2.5 5.0   O2   txt
+```
 
 # Typos
 
