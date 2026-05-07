@@ -117,8 +117,11 @@ main_gcell (102)                                 # reads input file, performs ca
                   +-cmplx.h (header)
                   |
                   +-cmplx (61)                   # set of complex arithmetic functions for humlicek(...)
+```
 
-LOC (excluding humlicek) = 102 + 34 + 38 + 59 + 28 = 261
+LOC (excluding humlicek) = 102 + 34 + 38 + 59 + 28 = 261  
+
+Code `aspect` does not use `main_gcell` and `isotops` functions
 
 
 # Typos
