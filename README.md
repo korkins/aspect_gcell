@@ -82,9 +82,11 @@ Example:
 Absorption cross-section per molecule is computed as: k(ν) = τ(ν) / n_column (cm2/molec)
 
 ## Code structure (Tree & LOC)
-The lines of code (LOC) count excludes headers
+
+The lines of code (LOC) count excludes headers.
+
 ```
-main_gcell (102)                                 # reads input file, makes calculations, prints output
+main_gcell (102)                                 # reads input file, performs calculations, prints output
          |
          +-paths.h (header)                      # defines hardcoded paths to HITRAN and TIPS files
          |
@@ -96,28 +98,28 @@ main_gcell (102)                                 # reads input file, makes calcu
          |           |
          |           +-const_param.h
          |
-         +-read_hitran160 (38)                   # reads HITRAN data from a 160 symbols per record *.par ASCII file
+         +-read_hitran160 (38)                   # reads HITRAN data from a 160-character-per-record *.par ASCII file
          |              |
          |              +-paths.h
          |              |
          |              +-const_param.h
          |
-         +-isotops (59)                          # calculates TIPS ratio and returns parameters of isotopes
+         +-isotops (59)                          # calculates TIPS ratios and returns isotope parameters
          |       |
          |       +-paths.h
          |       |
          |       +-const_param.h
          |
-         +-ix1ix2 (28)                           # for x0 and dx, finds indices in an array x[] so that x0-dx <= x[ix1] < x[ix2] <= x0+dx
+         +-ix1ix2 (28)                           # finds indices in array x[] such that x0-dx <= x[ix1] < x[ix2] <= x0+dx
          |
-         +-humlicek (42)                         # calculates Voigt profile from Lorentz and Doppler line shape parameters (slowest part of the code)
+         +-humlicek (42)                         # computes Voigt profile from Lorentz and Doppler parameters (slowest part of the code)
                   |
                   +-cmplx.h (header)
                   |
-                  +-cmplx (61)                   # set of complex arithmetics functions for humlicek(...)
+                  +-cmplx (61)                   # set of complex arithmetic functions for humlicek(...)
 
 LOC (excluding humlicek) = 102 + 34 + 38 + 59 + 28 = 261
-```
+
 
 # Typos
 1. Corrigendum: https://doi.org/10.1016/j.jqsrt.2025.109713
