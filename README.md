@@ -67,7 +67,7 @@ Example:
 ## Output file format
 
 - Top line: left value is `fill_value = -999`; right value is column number density, `n_column` (molec/cm2)
-- Subsequent lines: left value is wavenumber ν (cm⁻¹); right value is optical thickness τ(ν)
+- Subsequent lines: left value is wavenumber ν (cm-1); right value is optical thickness τ(ν)
 
 Example:
 
