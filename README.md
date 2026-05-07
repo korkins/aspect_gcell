@@ -65,17 +65,21 @@ Example:
 ```
 
 ## Output file format
-- top line, left number: fill_value=-999; right number: column number density, n_column (molec/cm2)  
-- next lines, left number: wavenumber v (cm-1); right numbers: optical thickness tau(v)  
+
+- Top line: left value is `fill_value = -999`; right value is column number density, `n_column` (molec/cm2)
+- Subsequent lines: left value is wavenumber ν (cm⁻¹); right value is optical thickness τ(ν)
 
 Example:
+
 ```
-    -999.000  3.621485e+14
-     500.000  1.613564e-17
-     500.010  1.301552e-17
-     ...
+-999.000  1.983498e+20
+ 4081.901  1.629810e-02
+ 4081.903  1.615791e-02
+......................
+ 4505.695  4.662289e-02
+ 4505.697  4.712665e-02
 ```
-Calculate absorption cross-section per molecule k(v) = tau / n_column (cm2/molec)
+Absorption cross-section per molecule is computed as: k(ν) = τ(ν) / n_column (cm2/molec)
 
 ## Code structure (Tree & LOC)
 The lines of code (LOC) count excludes headers
