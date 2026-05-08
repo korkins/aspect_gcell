@@ -133,14 +133,14 @@ Assuming `./` is the source directory (with `./src`, `./hitran`, etc.), run the 
 # Compile only the 'aspect' code (note _a, contrary to _g for 'gcell')
 $ make -f makefile_a
 
-# Run the code without an input file (quick test: the O2 A-band runs by default)
+# Run the code without an input file (quick test: the O2 A-band runs by default, see ./check/aspect_noinp_check.txt and note that possible HITRAN version differences could affect the output)
 $ ./aspect
 
 # Run the code with a user-defined input file
 $ ./aspect filename
 ```
 
-The latter command should create the file, e.g., `aspect-o2.txt` (see next section). The file can be compared against our output file `./check/gcell-ch4_check.txt` (keeping possible HITRAN version differences in mind).
+The latter command should create the file, e.g., `O2.txt` (see next section).
 
 ## Input file format
 
@@ -156,7 +156,7 @@ molec_id  iatm  column_amount  nu_usr_min  nu_usr_max  dnu  nzkm  zkm[]  fname  
 - `nu_usr_min`, `nu_usr_max`, `dnu` (floats): define the grid of wavenumbers, ν (cm⁻¹); the minimum (left) and maximum (right) grid points are `nu_usr_min` and `nu_usr_max`, respectively; `dnu` is the grid step (often 0.01 cm⁻¹)
 - `nzkm` (integer): number of altitude levels at which spectral absorption optical depth τ(ν, z) will be calculated
 - `zkm[]` (array of `nzkm` floats): altitudes (km); τ(ν, z) corresponds to optical depth between TOA and level z
-- `fname` (string): output file name (optionally with path; up to 256 characters long)
+- `fname` (string): output file name base (without extension, optionally with path; up to 256 characters long)
 - `fmt` (string: `txt` or `bin`): output format — ASCII if `txt`, binary otherwise
 
 Example (note `-1.0` yields the standard amount of O2: 209000 ppmv or 20.9%):
@@ -164,6 +164,40 @@ Example (note `-1.0` yields the standard amount of O2: 209000 ppmv or 20.9%):
 ```
 7   6   -1.0   13050.0   13160.0   0.01   3   0.0 2.5 5.0   O2   txt
 ```
+
+## Output file format
+
+Code `aspect` returns partial-column optical thicknesses (from TOA to the specified altitudes), not layer optical thicknesses calculated as differences between partial-column optical thicknesses. The output for the example above is as follows (see `./check/aspect_noinp_check.txt`; note that possible HITRAN version differences may affect the numbers shown).
+```
+# columns: [1] index inu, [2] nu (cm-1), [3:] tau from TOA to zkm =    0.000   2.500   5.000
+0  13050.0000    2.725424e-01    1.365520e-01    6.542805e-02
+1  13050.0100    2.838314e-01    1.421957e-01    6.812620e-02
+2  13050.0200    2.958670e-01    1.482122e-01    7.100233e-02
+.............................................................
+10998  13159.9800    4.738309e-01    2.376659e-01    1.140908e-01
+10999  13159.9900    4.857890e-01    2.432799e-01    1.166022e-01
+11000  13160.0000    4.994583e-01    2.497651e-01    1.195352e-01
+```
+As the header (#) indicates, the columns from left to right are: zero-offset index (for reference), wavenumber ν (cm-1), and partial optical thicknesses τ(ν, z) from TOA to z = 0.0 (BOA), 2.5, and 5.0 km, respectively, according to the input file (see example above).
+
+If, instead of `fmt = txt`, the user requests binary format (`fmt = bin`), three files will be generated (assuming the filename base, e.g. `aspect-o2a`, is defined in the input file):
+
+- `aspect-o2a_dat.txt`: contains information necessary to read the binary files: the numbers of spectral and height grid points. It also indicates that floating-point numbers are stored in single-precision 32-bit format.
+```
+ spectral interval: left bound {nu0}, resolution {dnu}, nu[inu] = nu0 + inu*dnu
+ 13050.0000  0.0100
+ data shape: number of records {nnu}, number of heights {nzkm}:
+ 11001  3
+ py: data = np.fromfile('*.bin', dtype=np.float32)
+ py: tau[0:nnu, 0:nzkm] = np.reshape(data, (nnu, nzkm))
+ dtype(*_inu.bin) = int_32bit
+ dtype(*.bin) = float_32bit
+```
+- The other two files, `aspect-o2a_inu.bin` and `aspect-o2a.bin`, contain 32-bit integer indices `inu` corresponding to the wavenumbers ν (cm-1). In `aspect-o2a.bin`, the height grid is the leading dimension; for each wavenumber index `inu`, optical thicknesses at different heights are stored consecutively.
+ 
+See ./check folder for the mentioned files.  
+
+In `./src/const_param.h`, line 14, `tau_min = 1.0e-4` defines the smallest total-column optical thickness τ(ν, z) at BOA to be saved in the `bin` file. Smaller values are omitted, reducing the size of the `bin` file but violating equidistance in the ν grid. The `txt` file contains all τ(ν, z) values, including 0.0.
 
 # Typos
 
