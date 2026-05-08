@@ -195,7 +195,7 @@ If, instead of `fmt = txt`, the user requests binary format (`fmt = bin`), three
 ```
 - The other two files, `aspect-o2a_inu.bin` and `aspect-o2a.bin`, contain 32-bit integer indices `inu` corresponding to the wavenumbers ν (cm-1). In `aspect-o2a.bin`, the height grid is the leading dimension; for each wavenumber index `inu`, optical thicknesses at different heights are stored consecutively.
  
-See ./check folder for the mentioned files.  
+See `./check` folder for the mentioned files.  
 
 In `./src/const_param.h`, line 14, `tau_min = 1.0e-4` defines the smallest total-column optical thickness τ(ν, z) at BOA to be saved in the `bin` file. Smaller values are omitted, reducing the size of the `bin` file but violating equidistance in the ν grid. The `txt` file contains all τ(ν, z) values, including 0.0.
 
