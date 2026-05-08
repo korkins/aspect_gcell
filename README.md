@@ -199,8 +199,10 @@ See `./check` folder for the mentioned files.
 
 In `./src/const_param.h`, line 14, `tau_min = 1.0e-4` defines the smallest total-column optical thickness τ(ν, z) at BOA to be saved in the `bin` file. Smaller values are omitted, reducing the size of the `bin` file but violating equidistance in the ν grid. The `txt` file contains all τ(ν, z) values, including 0.0.
 
-# Typos
+# Typos, Clarification
 
 1. Corrigendum: https://doi.org/10.1016/j.jqsrt.2025.109713
 
 2. Fig. 1(a and b): `ix1ix2()` function block, comment (in green): "... x0-dx <= x[ix1] < x[ix**2**] <= x0+dx ..." (note the bold **2**)
+
+3. Fig. 1(b): `tauabs25()` function block, comment (in green): "Integrates extiction profile ..." - although this is correct, "Integrates absorption cross-section profile ..." is more accurate.
