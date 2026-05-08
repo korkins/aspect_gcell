@@ -203,5 +203,4 @@ In `./src/const_param.h`, line 14, `tau_min = 1.0e-4` defines the smallest total
 
 1. Corrigendum: https://doi.org/10.1016/j.jqsrt.2025.109713
 
-2. Page 5, Fig. 1(a): `ix1ix2()` function block, comment (in green):  
-   "... x0-dx <= x[ix1] < x[ix**2**] <= x0+dx ..." (note the bold **2**)
+2. Fig. 1(a and b): `ix1ix2()` function block, comment (in green): "... x0-dx <= x[ix1] < x[ix**2**] <= x0+dx ..." (note the bold **2**)
