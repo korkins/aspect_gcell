@@ -2,23 +2,23 @@
 
 This repository contains the source codes described in S. Korkin, A. M. Sayer, A. Ibrahim, and A. Lyapustin, "A practical guide to coding line-by-line trace gas absorption in Earth’s atmosphere", *Journal of Quantitative Spectroscopy and Radiative Transfer*, vol. 337: 109345, 2025. doi: https://doi.org/10.1016/j.jqsrt.2025.109345 (see also the corrigendum: https://doi.org/10.1016/j.jqsrt.2025.109713).
 
-The first code, 'gcell', simulates line-by-line (LBL, monochromatic) absorption in a gas cell. The second one, 'aspect', is intended for atmospheric absorption spectroscopy simulations. The two codes share many files; therefore, it is recommended to study 'gcell' before exploring 'aspect'.
+The first code, `gcell`, simulates line-by-line (LBL, monochromatic) absorption in a gas cell. The second one, `aspect`, is for atmospheric absorption spectroscopy simulations. The two codes share many files; therefore, it is recommended to study `gcell` before exploring `aspect`.
 
 For both codes, spectral line parameters are taken from HITRAN (v.2020), while the hard-coded atmospheric profiles of temperature, pressure, and gas concentration are based on AFGL/MODTRAN models.
 
-For another type of absorption, see S. Korkin, A. M. Sayer, A. Ibrahim, and A. Lyapustin, "A practical guide to simulating continuum absorption in Earth’s atmosphere", *Journal of Quantitative Spectroscopy and Radiative Transfer*, vol. TBD: TBD, 202X (currently under second revision).
+For another type of absorption, see S. Korkin, A. M. Sayer, A. Ibrahim, and A. Lyapustin, "A practical guide to simulating continuum absorption in Earth’s atmosphere", *Journal of Quantitative Spectroscopy and Radiative Transfer*, vol. TBD: TBD, 202X (currently under the 2nd revision).
 
 # Quick installation
 
 1. Download into `./` (a local source folder; any name is fine, since paths to the HITRAN database are hard-coded as relative paths).
 2. Unzip the `*.par` files into `./hitran/`.
-3. The PDFs included with the source code — the paper and corrigendum — may be deleted.
+3. The PDFs included with the source code - the paper and corrigendum - may be deleted.
 4. In `./src/paths.h` (lines 6-7), check the paths and update them if necessary.
-5. Run `make`. Two executables should be compiled shortly: `./gcell` and `./aspect` — see below for further instructions.
+5. Run `make`. Two executables should be compiled shortly: `./gcell` and `./aspect` - see below for further instructions.
 
 # Troubleshooting
 
-- Both codes were originally developed on a Windows machine. The HITRAN `*.par` files were first downloaded to Windows and occasionally opened during debugging or inspection. The codes were then uploaded to GitHub. Although we tested the GitHub version on Linux, differences in line endings between Windows and Linux in the HITRAN `*.par` files may still remain. This discrepancy can cause strange errors, such as zeros in the output (when some absorption should be present) or segmentation faults. Arguably the easiest fix is to open the ASCII file on a Linux machine, add and immediately remove a space anywhere in the file, save it, and run the code again. Alternatively, download fresh `*.par` files directly from HITRAN (https://hitran.org/lbl/), while keeping in mind the version difference: the paper uses HITRAN 2020, whereas newly downloaded files may correspond to HITRAN 2024 or later.
+- Both codes were originally developed on a Windows machine. The HITRAN `*.par` files were first downloaded to Windows and occasionally opened during debugging or inspection. The codes were then uploaded to GitHub. Although we tested the GitHub version on Linux, differences in line endings between Windows and Linux in the HITRAN `*.par` files may still remain. This discrepancy can cause strange errors, such as zeros in the output (when some absorption should be present) or segmentation faults. Arguably the easiest fix is to open the ASCII file on a Linux machine, add and immediately remove a space anywhere in the file, save it, and run the code again. Alternatively, download fresh `*.par` files directly from HITRAN (https://hitran.org/lbl/), while keeping in mind the version difference: the paper uses HITRAN 2020 (mostly), whereas newly downloaded files may correspond to HITRAN 2024 or later.
 
 - Depending on the machine, the user may encounter an endianness discrepancy (https://en.wikipedia.org/wiki/Endianness) while comparing their `*.bin` output files (from `aspect` only) against ours. So far, we have never encountered this problem ourselves.
 
@@ -41,7 +41,7 @@ $ ./gcell
 $ ./gcell filename
 ```
 
-The latter command should create the file, e.g., `gcell-ch4.txt` (see next section). The file can be compared against our output file `./check/gcell-ch4_check.txt` (keeping possible HITRAN version differences in mind).
+The latter command should create the file, e.g., `gcell-ch4.txt` (see next section).
 
 ## Input file format
 
@@ -79,7 +79,7 @@ Example:
  4505.695  4.662289e-02
  4505.697  4.712665e-02
 ```
-Absorption cross-section per molecule is computed as: k(ν) = τ(ν) / n_column (cm2/molec)
+Absorption cross-section per molecule is computed as: k(ν) = τ(ν) / n_column (cm2/molec). Compared the example above against our output file `./check/gcell-ch4_check.txt` (keeping possible HITRAN version differences in mind).
 
 ## Code structure (Tree & LOC)
 
@@ -160,14 +160,13 @@ molec_id  iatm  column_amount  nu_usr_min  nu_usr_max  dnu  nzkm  zkm[]  fname  
 - `fmt` (string: `txt` or `bin`): output format — ASCII if `txt`, binary otherwise
 
 Example (note `-1.0` yields the standard amount of O2: 209000 ppmv or 20.9%):
-
 ```
 7   6   -1.0   13050.0   13160.0   0.01   3   0.0 2.5 5.0   O2   txt
 ```
 
 ## Output file format
 
-Code `aspect` returns partial-column optical thicknesses (from TOA to the specified altitudes), not layer optical thicknesses calculated as differences between partial-column optical thicknesses. The output for the example above is as follows (see `./check/aspect_noinp_check.txt`; note that possible HITRAN version differences may affect the numbers shown).
+Code `aspect` returns partial-column optical thicknesses τ(ν, z) from TOA to the specified altitude z (km), not layer optical thicknesses calculated as differences between partial-column optical thicknesses. The output for the example above is as follows (see `./check/aspect_noinp_check.txt`; note that possible HITRAN version differences may affect the numbers shown):
 ```
 # columns: [1] index inu, [2] nu (cm-1), [3:] tau from TOA to zkm =    0.000   2.500   5.000
 0  13050.0000    2.725424e-01    1.365520e-01    6.542805e-02
@@ -178,11 +177,11 @@ Code `aspect` returns partial-column optical thicknesses (from TOA to the specif
 10999  13159.9900    4.857890e-01    2.432799e-01    1.166022e-01
 11000  13160.0000    4.994583e-01    2.497651e-01    1.195352e-01
 ```
-As the header (#) indicates, the columns from left to right are: zero-offset index (for reference), wavenumber ν (cm-1), and partial optical thicknesses τ(ν, z) from TOA to z = 0.0 (BOA), 2.5, and 5.0 km, respectively, according to the input file (see example above).
+As the #-header indicates, the columns from left to right are: zero-offset index (for reference), wavenumber ν (cm-1), and partial optical thicknesses τ(ν, z) from TOA to z = 0.0 (BOA), 2.5, and 5.0 km, respectively, according to the input file (see the example above).
 
 If, instead of `fmt = txt`, the user requests binary format (`fmt = bin`), three files will be generated (assuming the filename base, e.g. `aspect-o2a`, is defined in the input file):
 
-- `aspect-o2a_dat.txt`: contains information necessary to read the binary files: the numbers of spectral and height grid points. It also indicates that floating-point numbers are stored in single-precision 32-bit format.
+- `aspect-o2a_dat.txt`: contains information necessary to read the binary files: the numbers of spectral and height grid points. It also indicates that floating-point numbers are stored in single-precision 32-bit format and provides a Python code snippet to read the `bin` file (see the next bullet)
 ```
  spectral interval: left bound {nu0}, resolution {dnu}, nu[inu] = nu0 + inu*dnu
  13050.0000  0.0100
@@ -193,7 +192,7 @@ If, instead of `fmt = txt`, the user requests binary format (`fmt = bin`), three
  dtype(*_inu.bin) = int_32bit
  dtype(*.bin) = float_32bit
 ```
-- The other two files, `aspect-o2a_inu.bin` and `aspect-o2a.bin`, contain 32-bit integer indices `inu` corresponding to the wavenumbers ν (cm-1). In `aspect-o2a.bin`, the height grid is the leading dimension; for each wavenumber index `inu`, optical thicknesses at different heights are stored consecutively.
+- The other two files, `aspect-o2a_inu.bin` and `aspect-o2a.bin`, contain 32-bit integer indices `inu` corresponding to the wavenumbers ν (cm-1) and values of τ(ν, z), respectively. In `aspect-o2a.bin`, the height grid is the leading dimension; for each wavenumber index `inu`, optical thicknesses at different heights are stored consecutively (see the Python code snippet above).
  
 See `./check` folder for the mentioned files.  
 
