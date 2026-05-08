@@ -199,6 +199,60 @@ See `./check` folder for the mentioned files.
 
 In `./src/const_param.h`, line 14, `tau_min = 1.0e-4` defines the smallest total-column optical thickness τ(ν, z) at BOA to be saved in the `bin` file. Smaller values are omitted, reducing the size of the `bin` file but violating equidistance in the ν grid. The `txt` file contains all τ(ν, z) values, including 0.0.
 
+## Code structure (Tree & LOC)
+
+The lines of code (LOC) count excludes headers.
+```
+main_aspect (165)                                 # reads input, scales gas profile to user-defined amount, calls dependencies, prints output
+          |
+          +-paths (header)                        # defines hardcoded paths to HITRAN and TIPS files
+          |
+          +-const_param (header)                  # defines physical constants, file names, accuracy parameters
+          |
+          +-hprofiles (header)                    # AFGL/MODTRAN temperature, pressure, concentration, and gas mixing ratio profiles
+          |
+          +-simpson (8)                           # integrates f(x) numerically using Simpson's rule
+          |
+          +-intparab (8)                          # optionally supplements simpson(...) by fitting parabola to 3 points [xi, yi] and integrating it 
+          |
+          +-count_lines (34)                      # counts HITRAN records within user-defined spectral band
+          |           |
+          |           +-paths (header)
+          |           |
+          |           +-const_param (header)
+          |
+          +-read_hitran160 (38)                   # reads HITRAN data from a 160 symbols per record *.par ASCII file
+          |              |
+          |              +-paths (header)
+          |              |
+          |              +-const_param (header)
+          |
+          +-kabs (12)                             # calculates absorption cross-section per molecule using HITRAN data
+          |    |
+          |    +-ix1ix2 (28)                      # for x0 and dx, finds indices in an array x[:] such that x0-dx <= x[ix1] < x[ix2] <= x0+dx
+          |    |
+          |    +-hisotops (22)                    # calculates TIPS ratio profile and returns parameters of isotopes
+          |    |        |
+          |    |        +-paths (header)
+          |    |        |
+          |    |        +-const_param (header)
+          |    |
+          |    +-humlicek (42)                    # calculates Voigt profile from Lorentz and Doppler line shape parameters (slowest part of the code)
+          |             |
+          |             +-cmplx.h (header)
+          |             |
+          |             +-cmplx (61)
+          |
+          +-tauabs25 (13)                         # accounts for molecular concentration and integrates absorption cross-section profile from TOA to zkm[:] < 25km
+                   |
+                   +-simpson
+                   |
+                   +-intparab
+
+
+LOC (excluding humlicek) = 165 + 8 + 8 + 34 + 38 + 12 + 28 + 22 + 42 + 13 = 370
+```
+
 # Typos, Clarification
 
 1. Corrigendum: https://doi.org/10.1016/j.jqsrt.2025.109713
