@@ -249,7 +249,7 @@ main_aspect (165)                                 # reads input, scales gas prof
                    +-intparab
 
 
-LOC (excluding humlicek) = 165 + 8 + 8 + 34 + 38 + 12 + 28 + 22 + 42 + 13 = 370
+LOC (excluding humlicek) = 165 + 8 + 8 + 34 + 38 + 12 + 28 + 22 + 13 = 328
 ```
 
 # Typos, Clarifications, Notes
