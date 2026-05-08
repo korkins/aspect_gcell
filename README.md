@@ -253,10 +253,9 @@ main_aspect (165)                                 # reads input, scales gas prof
 LOC (excluding humlicek) = 165 + 8 + 8 + 34 + 38 + 12 + 28 + 22 + 42 + 13 = 370
 ```
 
-# Typos, Clarification
+# Typos, Clarifications, Notes
 
 1. Corrigendum: https://doi.org/10.1016/j.jqsrt.2025.109713
-
-2. Fig. 1(a and b): `ix1ix2()` function block, comment (in green): "... x0-dx <= x[ix1] < x[ix**2**] <= x0+dx ..." (note the bold **2**)
-
-3. Fig. 1(b): `tauabs25()` function block, comment (in green): "Integrates extiction profile ..." - although this is correct, "Integrates absorption cross-section profile ..." is more accurate.
+2. LOC (lines of code) were counted using ChatGPT with the following instruction: *LOC excludes: 1) declarations: variables, #inlude-s, function prototypes; 2) blank and decorative lines; 3) comment-only lines: // and /* ... */; 4) brace-only lines: { and }*
+3. Fig. 1(a and b): `ix1ix2()` function block, comment (in green): "... x0-dx <= x[ix1] < x[ix**2**] <= x0+dx ..." (note the bold **2**)
+4. Fig. 1(b): `tauabs25()` function block, comment (in green): "Integrates extiction profile ..." - although this is correct, "Integrates absorption cross-section profile ..." is more accurate.
